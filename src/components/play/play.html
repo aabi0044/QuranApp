@@ -1,0 +1,41 @@
+<br>
+<ion-row>
+  <ion-col col-12>
+    <ion-range min="0" max="100" [(ngModel)]="saturation" color="primary" (ionChange)="onChangeTime()">
+      <ion-label range-left>
+        <span>{{ rangeUpdate()}}</span>
+        <span *ngIf="audio_status == 1 || audio_status == 2">{{get_time(audio.currentTime) }}</span>
+        <span *ngIf="audio_status == 0">00:00</span>
+      </ion-label>
+      <ion-label range-right>
+        <span *ngIf="audio_status == 1 || audio_status == 2">{{get_time(audio.duration) }}</span>
+        <span *ngIf="audio_status == 0">00:00</span>
+      </ion-label>
+    </ion-range>
+  </ion-col>
+  <!--<ion-col col-2 text-center>-->
+  <!--<span *ngIf="audio_status == 1 || audio_status == 2">{{get_time(audio.currentTime) }}</span>-->
+  <!--<span *ngIf="check_audio == 0">00:00</span>-->
+
+  <!--</ion-col>-->
+  <!--<ion-col col-8><input type="range" min="1" max="100" value="0" style="width: 100%;" (change)="onChangeTime($event.target.value)"></ion-col>-->
+  <!--<ion-col col-2 text-left>-->
+  <!--<span *ngIf="audio_status == 1 || audio_status == 2">{{get_time(audio.duration) }}</span>-->
+  <!--<span *ngIf="audio_status == 0">00:00</span>-->
+
+  <!--</ion-col>-->
+</ion-row>
+<ion-row>
+  <ion-col *ngIf="audio_repeat == false" (click)="audio_repeatFun(1)" col-1 padding-vertical text-left><ion-icon name="repeat" style="font-size: 30px;color: #909090"></ion-icon></ion-col>
+  <ion-col *ngIf="audio_repeat == true" (click)="audio_repeatFun(0)" col-1 padding-vertical text-left><ion-icon name="repeat" style="font-size: 32px;color: white"></ion-icon></ion-col>
+  <ion-col col-10>
+    <ion-row>
+      <ion-col col-2 offset-3 text-right margin-top (click)="pre()"><ion-icon name="rewind" style="font-size: 20px;"></ion-icon></ion-col>
+
+      <ion-col col-2 padding-top text-center (click)="audio_action(2)" *ngIf="audio_status == 1"><ion-icon name="pause" style="font-size: 30px;"></ion-icon></ion-col>
+      <ion-col col-2 padding-top text-center (click)="audio_action(1)" *ngIf="audio_status != 1"><ion-icon name="play" style="font-size: 30px;"></ion-icon></ion-col>
+      <ion-col col-2 margin-top (click)="next()"><ion-icon name="fastforward" style="font-size: 20px;"></ion-icon></ion-col>
+    </ion-row>
+  </ion-col>
+  <ion-col col-1 padding-vertical padding-bottom text-right (click)="downloadFun()"><ion-icon name="cloud-download" style="font-size: 20px;"></ion-icon></ion-col>
+</ion-row>
